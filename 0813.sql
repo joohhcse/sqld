@@ -64,12 +64,19 @@ commit;
 
 SELECT * FROM dept_h;
 
-
+--순방향 쿼리
 SELECT LEVEL lv, dept_h.*
 FROM dept_h
 START WITH p_deptcd IS NULL
 CONNECT BY PRIOR deptcd = p_deptcd;
 
+--역방향 쿼리
+SELECT LEVEL lv, dept_h.*
+FROM dept_h
+START WITH deptcd = 'dept0_02_1'
+CONNECT BY PRIOR p_deptcd = deptcd;
+
+------------------------------------------------------------
 
 SELECT LEVEL lv, dept_h.deptcd, LPAD(' ', (LEVEL-1)*3) || deptnm
 FROM dept_h
@@ -80,8 +87,15 @@ SELECT LPAD('-', 5) ||'aa'
 FROM DUAL;
 
 
-
-
+SELECT LEVEL, LPAD(' ', (LEVEL-1)*3) || deptnm
+FROM dept_h
+START WITH deptcd = 'dept0_02'            -- 시작점은 deptcd = 'dept0' --> XX회사(최상위조직)
+CONNECT BY PRIOR deptcd = p_deptcd;    -- PRIOR (이미 읽어준 녀석)
+--------------------------------------------------------------
+SELECT LEVEL lv, dept_h.deptcd, LPAD(' ', (LEVEL-1)*3) || deptnm
+FROM dept_h
+START WITH p_deptcd IS NULL
+CONNECT BY PRIOR p_deptcd = deptcd;
 
 
 
