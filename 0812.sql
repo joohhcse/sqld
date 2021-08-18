@@ -239,7 +239,7 @@ INSERT INTO 사원 VALUES('006', '안성기', '2014-01-01', '005');
 INSERT INTO 사원 VALUES('007', '이수근', '2014-01-01', '005');
 INSERT INTO 사원 VALUES('008', '김병만', '2014-01-01', '005');
 
-SELECT * FORM 사원;
+SELECT * FORM 사원; 
 
 SELECT 사원번호, 사원명, 입사일자, 매니저사원번호
 FROM 사원
